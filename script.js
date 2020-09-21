@@ -10,7 +10,7 @@ pizzaJson.map((item, index)=>{
 
     let pizzaItem = document.querySelector('.models .pizza-item').cloneNode(true);
     // Seleção do html display none para uma areá de pizzas 
-
+    pizzaItem.setAtribute('data-key',index);
     pizzaItem.querySelector('.pizza-item--name').innerHTML = item.name;
     pizzaItem.querySelector('.pizza-item--desc').innerHTML = item.description;
     pizzaItem.querySelector('.pizza-item--price').innerHTML = `R$ ${item.price.toFixed(2)}`;
