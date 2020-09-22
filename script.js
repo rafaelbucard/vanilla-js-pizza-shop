@@ -24,7 +24,11 @@ pizzaJson.map((item, index)=>{
         doc('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
         doc('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
         doc('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2)}`;
+        doc('.pizzaInfo--size.selected').classList.remove('selected');
         docAll('.pizzaInfo--size').forEach((size,sizeIndex)=>{
+            if(sizeIndex == 2){
+                size.classList.add('selected');
+            }
             size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
         });
         doc('.pizzaWindowArea').style.opacity = 0;
