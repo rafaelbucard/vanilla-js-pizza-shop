@@ -6,6 +6,8 @@ const docAll = function(el){
     return document.querySelectorAll(el);
     // função de atalho para document.querySelectorAll
 } 
+
+//Listando Pizzas
 pizzaJson.map((item, index)=>{
 
     let pizzaItem = document.querySelector('.models .pizza-item').cloneNode(true);
@@ -39,7 +41,16 @@ pizzaJson.map((item, index)=>{
         
     });
 
-
-
     doc('.pizza-area').append(pizzaItem);
+});
+
+// Eventos de add carrinho e fechar  Modal 
+function closeModal(){
+    doc('.pizzaWindowArea').style.opacity = 0;
+    setTimeout(()=>{
+        doc('.pizzaWindowArea').style.display= 'none';
+    }, 500);
+}
+docAll('.pizzaInfo--cancelButton,.pizzaInfo--cancelMobileButton').forEach((item)=>{
+    item.addEventListener('click', closeModal);
 });
