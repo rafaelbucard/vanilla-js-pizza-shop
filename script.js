@@ -1,3 +1,7 @@
+let cart = [];
+let modalKey = 0;
+let modalQt = 1;
+
 const doc = function(el){
     return document.querySelector(el);
     // função de atalho para document.querySelector
@@ -22,6 +26,9 @@ pizzaJson.map((item, index)=>{
         e.preventDefault();
         //Pegando key da pizza
         let key = e.target.closest('.pizza-item').getAttribute('data-key');
+        modalQt = 1;
+        modalKey = key;
+
         doc('.pizzaBig img').src = pizzaJson[key].img;
         doc('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
         doc('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
@@ -33,6 +40,8 @@ pizzaJson.map((item, index)=>{
             }
             size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
         });
+        doc('.pizzaInfo--qt').innerHTML = modalQt;
+
         doc('.pizzaWindowArea').style.opacity = 0;
         doc('.pizzaWindowArea').style.display = 'flex';
         setTimeout(()=>{
@@ -54,3 +63,35 @@ function closeModal(){
 docAll('.pizzaInfo--cancelButton,.pizzaInfo--cancelMobileButton').forEach((item)=>{
     item.addEventListener('click', closeModal);
 });
+
+doc('.pizzaInfo--qtmenos').addEventListener('click', ()=>{
+    if (modalQt>1){
+        modalQt--;
+        doc('.pizzaInfo--qt').innerHTML = modalQt;
+    }
+});
+
+doc('.pizzaInfo--qtmais').addEventListener('click', ()=>{
+    modalQt++;
+    doc('.pizzaInfo--qt').innerHTML = modalQt;
+    
+});
+
+// selecionando Tamanho 
+docAll('.pizzaInfo--size').forEach((size,sizeIndex)=>{
+   size.addEventListener('click',(e)=>{
+    doc('.pizzaInfo--size.selected').classList.remove('selected');
+    size.classList.add('selected');
+   })
+});
+
+//Add ao carrinho
+doc('.pizzaInfo--addButton').addEventListener('click', ()=>{
+    let size = parseInt( doc('.pizzaInfo--size.selected').getAttribute('data-key'));
+    cart.push({
+        id:pizzaJson[modalKey].id,
+        size,
+        qt:modalQt
+    })
+  closeModal();
+})
