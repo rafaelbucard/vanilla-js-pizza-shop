@@ -88,10 +88,22 @@ docAll('.pizzaInfo--size').forEach((size,sizeIndex)=>{
 //Add ao carrinho
 doc('.pizzaInfo--addButton').addEventListener('click', ()=>{
     let size = parseInt( doc('.pizzaInfo--size.selected').getAttribute('data-key'));
+    
+    let identfier = pizzaJson[modalKey].id+'@'+size;
+
+    let key = cart.findIndex((item)=>item.identfier == identfier);
+
+    if(key > -1){
+        cart[key].qt += modalQt;
+    } else {
+
     cart.push({
+        identfier,
         id:pizzaJson[modalKey].id,
         size,
         qt:modalQt
     })
+}
+
   closeModal();
 })
