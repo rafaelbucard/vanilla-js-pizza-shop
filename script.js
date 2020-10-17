@@ -112,8 +112,14 @@ doc('.pizzaInfo--addButton').addEventListener('click', ()=>{
 function updateCart() {
     if (cart.length > 0) {
         doc('aside').classList.add('show');
+        for(let i in cart) {
+            let pizzaItem = pizzaJson.find((item)=>{
+                return item.id == cart[i].id;
+            }); 
 
+            console.log(pizzaItem);
+        }
     } else {
-        doc('aside').classList.add('show'); 
+        doc('aside').classList.remove('show'); 
     }
 }
