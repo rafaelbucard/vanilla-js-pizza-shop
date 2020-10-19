@@ -112,12 +112,15 @@ doc('.pizzaInfo--addButton').addEventListener('click', ()=>{
 function updateCart() {
     if (cart.length > 0) {
         doc('aside').classList.add('show');
+        doc('.cart').innerHTML = '';
         for(let i in cart) {
             let pizzaItem = pizzaJson.find((item)=>{
                 return item.id == cart[i].id;
             }); 
 
-            console.log(pizzaItem);
+            let cartItem = doc('.models .cart--itens').cloneNode(true);
+            doc('.cart').append(cartItem);
+            
         }
     } else {
         doc('aside').classList.remove('show'); 
