@@ -107,7 +107,7 @@ doc('.pizzaInfo--addButton').addEventListener('click', ()=>{
 }
   updateCart();  
   closeModal();
-});
+}); 
 
 function updateCart() {
     if (cart.length > 0) {
@@ -118,7 +118,10 @@ function updateCart() {
                 return item.id == cart[i].id;
             }); 
 
-            let cartItem = doc('.models .cart--itens').cloneNode(true);
+            let cartItem = doc('.models .cart--item').cloneNode(true);
+            
+            cartItem.querySelector('img')
+           
             doc('.cart').append(cartItem);
             
         }
