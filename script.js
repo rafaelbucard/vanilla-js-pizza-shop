@@ -119,7 +119,7 @@ function updateCart() {
             }); 
 
             let cartItem = doc('.models .cart--item').cloneNode(true);
-            
+
             let pizzaSizeName;
             switch( cart[i].size){
               case 0:
@@ -133,11 +133,11 @@ function updateCart() {
                   break;
             }
             let pizzaName = `${pizzaItem.name} (${pizzaSizeName})`;
-           
+            
 
             cartItem.querySelector('img').src = pizzaItem.img;
             cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
-
+            cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qt;
            
             doc('.cart').append(cartItem);
             
