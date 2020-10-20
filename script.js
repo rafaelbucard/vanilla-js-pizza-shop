@@ -120,11 +120,13 @@ function updateCart() {
 
             let cartItem = doc('.models .cart--item').cloneNode(true);
             
-            cartItem.querySelector('img')
+            cartItem.querySelector('img').src = pizzaItem.img;
+            cartItem.querySelector('.cart--item--nome').innerHTML = pizzaItem.name;
+
            
             doc('.cart').append(cartItem);
             
-        }
+        } 
     } else {
         doc('aside').classList.remove('show'); 
     }
