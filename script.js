@@ -108,8 +108,16 @@ doc('.pizzaInfo--addButton').addEventListener('click', ()=>{
   updateCart();  
   closeModal();
 }); 
+
+doc('.menu-openner').addEventListener('click',()=>{
+    if (cart.length > 0 ) {
+        doc('aside').style.left = '0';
+    }
+});
+
 // Informarçoes de Pizzas no Carrinho
 function updateCart() {
+    doc('.menu-openner span').innerHTML = cart.length;
     if (cart.length > 0) {
         doc('aside').classList.add('show');
         doc('.cart').innerHTML = '';
