@@ -114,6 +114,12 @@ doc('.menu-openner').addEventListener('click',()=>{
         doc('aside').style.left = '0';
     }
 });
+doc('.menu-closer').addEventListener('click',()=>{
+    
+    doc('aside').style.left = '100vw';
+    
+});
+
 
 // Informarçoes de Pizzas no Carrinho
 function updateCart() {
@@ -121,10 +127,17 @@ function updateCart() {
     if (cart.length > 0) {
         doc('aside').classList.add('show');
         doc('.cart').innerHTML = '';
+
+        let subtotal = 0;
+        let desconto = 0;
+        let total = 0;
+
         for(let i in cart) {
+
             let pizzaItem = pizzaJson.find(function(item){
                 return item.id == cart[i].id;
             }); 
+            subtotal += pizzaItem.price * cart[i].qt;
 
             let cartItem = doc('.models .cart--item').cloneNode(true);
 
@@ -146,11 +159,37 @@ function updateCart() {
             cartItem.querySelector('img').src = pizzaItem.img;
             cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
             cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qt;
-           
+            cartItem.querySelector('.cart--item-qtmenos').addEventListener('click',()=>{
+                if(cart[i].qt >1) {
+                    cart[i].qt--;
+                    
+                } else {
+                    cart.splice(i,1);
+                }
+                updateCart();
+            })
+            ;cartItem.querySelector('.cart--item-qtmais').addEventListener('click',()=>{
+                cart[i].qt++;
+                updateCart();
+            });
+
+
             doc('.cart').append(cartItem);
             
         } 
+
+        desconto = subtotal * 0.1;
+        total = subtotal - desconto;
+
+        doc('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
+        doc('.desconto span:last-child').innerHTML = `R$ ${desconto.toFixed(2)}`;
+        doc('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
+
+        
+
+
     } else {
         doc('aside').classList.remove('show'); 
+        doc('aside').style.left = '100vw'; 
     }
 }
