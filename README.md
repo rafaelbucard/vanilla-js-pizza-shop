@@ -7,7 +7,7 @@
 
 ![](https://github.com/rafaelbucard/Compra-de-pizza/blob/master/images/desk02.png)
 
-![]()
+![](https://github.com/rafaelbucard/Compra-de-pizza/blob/master/images/desk03.png)
 
 # Mobile :iphone:
 
